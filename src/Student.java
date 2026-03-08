@@ -14,11 +14,12 @@ public class Student {
         this.studentId = studentId;
         this.phone = phone;
         this.email = email;
+        this.uffMail = uffMail;
         this.status = status;
     }
 
     public Boolean canCreateUffMail(){
-        return (this.status.equalsIgnoreCase("Ativo") && this.uffMail == null );
+        return (this.status.equalsIgnoreCase("Ativo") && (this.uffMail == null || this.uffMail.isEmpty()) );
 
     }
 
