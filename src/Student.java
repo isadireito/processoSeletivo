@@ -17,6 +17,11 @@ public class Student {
         this.status = status;
     }
 
+    public Boolean canCreateUffMail(){
+        return (this.status.equalsIgnoreCase("Ativo") && this.uffMail == null );
+
+    }
+
     public String getName() {
         return name;
     }
