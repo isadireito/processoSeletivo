@@ -5,7 +5,7 @@ import java.util.List;
 public class Menu {
 
 
-    public static void ShowOptions(String name, List<String> optionsUffMail ){
+    public static void showOptions(String name, List<String> optionsUffMail ){
         System.out.printf("%s, por favor escolha uma das opções abaixo para o seu UFFMail\n", name);
         for (int i = 0; i < optionsUffMail.size(); i++) {
             System.out.printf("%d - %s%n", i + 1, optionsUffMail.get(i));

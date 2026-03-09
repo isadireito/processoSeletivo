@@ -16,23 +16,25 @@ public class Main{
 
         Student student = listStudents.get(studentId);
 
-        if(student == null || !(student.canCreateUffMail())){
-            System.out.println("Erro ao criar UFFMail");
+        if(student == null){
+            System.out.println("Erro ao criar UFFMail, aluno não matriculado");
+            keyboard.close();
+            return;
+        }else if(!(student.canCreateUffMail())){
+            System.out.println("Erro ao criar UFFMail, aluno inativo ou já possui UFFMail!");
             keyboard.close();
             return;
         }
 
         List<String> optionsUffMail = UffMail.emailGenerate(student.getName());
         
-        Menu.ShowOptions(student.getName(), optionsUffMail); //show and validid options
+        Menu.showOptions(student.getName(), optionsUffMail); //show and validid options
         int op = keyboard.nextInt();
         if(op < 1 || op > 5){
             System.out.println("Opção inválida! Insira novamente");
             op = keyboard.nextInt();
         }
         student.setUffMail(optionsUffMail.get(op - 1));
-
-
 
         IO.writeStudents("alunos.csv", listStudents); //att student file
         Menu.showConfirmation(student.getUffMail(), student.getPhone());
