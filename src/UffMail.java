@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UffMail {
+
+    
     public static List<String> emailGenerate(String name){
 
         String[] fullName = name.toLowerCase().split(" ");
