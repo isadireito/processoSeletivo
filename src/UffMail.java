@@ -5,7 +5,7 @@ import java.util.List;
 
 public class UffMail {
 
-    private static final String DOIMAN = "@id.uff.br";
+    private static final String DOMAIN = "@id.uff.br";
 
     
     public static List<String> emailGenerate(String name){
@@ -16,17 +16,17 @@ public class UffMail {
         
         List<String> uffMailOp = new ArrayList<>();
 
-        uffMailOp.add(String.format("%s%s%s", firstName, lastName, DOIMAN));
-        uffMailOp.add(String.format("%s%s%s", firstName.substring(0, 3), lastName,  DOIMAN));
-        uffMailOp.add(String.format("%s%s%s", firstName.substring(0, 1), lastName, DOIMAN));
+        uffMailOp.add(String.format("%s%s%s", firstName, lastName, DOMAIN));
+        uffMailOp.add(String.format("%s%s%s", firstName.substring(0, 3), lastName,  DOMAIN));
+        uffMailOp.add(String.format("%s%s%s", firstName.substring(0, 1), lastName, DOMAIN));
 
         if( fullName.length > 2){
             String middleName = fullName[1];
-            uffMailOp.add(String.format("%s%s%s%s", firstName, middleName.substring(0,1 ), lastName.substring(0,1 ), DOIMAN));
-            uffMailOp.add(String.format("%s_%s%s", middleName, firstName, DOIMAN));
+            uffMailOp.add(String.format("%s%s%s%s", firstName, middleName.substring(0,1 ), lastName.substring(0,1 ), DOMAIN));
+            uffMailOp.add(String.format("%s_%s%s", middleName, firstName, DOMAIN));
         }else{
-            uffMailOp.add(String.format("%s_%s%s", lastName, firstName, DOIMAN));
-            uffMailOp.add(String.format("%s%s01%s", firstName, lastName, DOIMAN));
+            uffMailOp.add(String.format("%s_%s%s", lastName, firstName, DOMAIN));
+            uffMailOp.add(String.format("%s%s01%s", firstName, lastName, DOMAIN));
         }
 
         return uffMailOp;
