@@ -1,45 +1,43 @@
 package src;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main{
         
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
+        try{
+            StudentService studentService = new StudentService("alunos.csv");
+            System.out.println("Digite sua matrícula:");
+            Student student = studentService.findStudent(keyboard.next());
 
-        System.out.println("Digite sua matrícula:");
-        String studentId = keyboard.next();
+            if(student == null){
+                System.out.println("Erro ao criar UFFMail, aluno não matriculado");
+                return;
+            }else if(!(student.canCreateUffMail())){
+                System.out.println("Erro ao criar UFFMail, aluno inativo ou já possui UFFMail!");
+                return;
+            }
+            
+            List<String> optionsUffMail = studentService.generateOptions(student.getName());
+            Menu.showOptions(student.getName(), optionsUffMail);
 
-        Map<String, Student> listStudents = IO.readStudents("alunos.csv");
+            int op = Menu.getValidOption(keyboard, optionsUffMail.size());
+            student.setUffMail(optionsUffMail.get(op - 1));
 
-        Student student = listStudents.get(studentId);
+            studentService.assignUffMail(student, optionsUffMail.get(op - 1));
+            Menu.showConfirmation(student.getUffMail(), student.getPhone());
 
-        if(student == null){
-            System.out.println("Erro ao criar UFFMail, aluno não matriculado");
+
+        }catch(IOException e){
+            System.err.println("Erro: arquivo 'alunos.csv' não encontrado.");
+            System.exit(1);
+
+        }finally{
             keyboard.close();
-            return;
-        }else if(!(student.canCreateUffMail())){
-            System.out.println("Erro ao criar UFFMail, aluno inativo ou já possui UFFMail!");
-            keyboard.close();
-            return;
         }
-
-        List<String> optionsUffMail = UffMail.emailGenerate(student.getName());
-        
-        Menu.showOptions(student.getName(), optionsUffMail); //show and validid options
-        int op = keyboard.nextInt();
-        if(op < 1 || op > 5){
-            System.out.println("Opção inválida! Insira novamente");
-            op = keyboard.nextInt();
-        }
-        student.setUffMail(optionsUffMail.get(op - 1));
-
-        IO.writeStudents("alunos.csv", listStudents); //att student file
-        Menu.showConfirmation(student.getUffMail(), student.getPhone());
-        
-        keyboard.close();
 
     }
 }

@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class IO {
 
-    public static Map<String, Student> readStudents(String fileName){
+    public static Map<String, Student> readStudents(String fileName) throws IOException {
         
         Map<String, Student> listStudent = new HashMap<>();
 
@@ -27,8 +27,6 @@ public class IO {
                 }
             }
 
-        }catch (IOException e) {
-            e.printStackTrace();
         }
         return listStudent;
     }
