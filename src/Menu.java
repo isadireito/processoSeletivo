@@ -8,7 +8,8 @@ public class Menu {
 
 
     public static void showOptions(String name, List<String> optionsUffMail ){
-        System.out.printf("%s, por favor escolha uma das opções abaixo para o seu UFFMail\n", name);
+        String[] fullName = name.split(" ");
+        System.out.printf("%s, por favor escolha uma das opções abaixo para o seu UFFMail\n", fullName[0]);
         for (int i = 0; i < optionsUffMail.size(); i++) {
             System.out.printf("%d - %s%n", i + 1, optionsUffMail.get(i));
         }
